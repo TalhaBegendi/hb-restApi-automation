@@ -12,15 +12,13 @@ import io.restassured.specification.RequestSpecification;
 
 public class ApiRequestHandler {
     String apiBaseUrl;
-
     RequestSpecification requestSpecification;
+    DataStoreMap dataStoreMap = new DataStoreMap();
 
     public ApiRequestHandler(String apiBaseUrl) {
         this.apiBaseUrl = apiBaseUrl;
     }
-
-    DataStoreMap dataStoreMap = new DataStoreMap();
-
+    
     public Response postRequest(String path, Map<String, Object> headers, Object body) throws UnsupportedEncodingException {
         setRequestSpecification(headers, body);
         Response response = requestSpecification.post(path);
