@@ -11,6 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 
 public class ApiRequestHandler {
+    
     String apiBaseUrl;
     RequestSpecification requestSpecification;
     DataStoreMap dataStoreMap = new DataStoreMap();
