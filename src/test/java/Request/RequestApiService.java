@@ -3,31 +3,30 @@ package Request;
 import Store.LanguageStore;
 import constant.APIConstants;
 import io.restassured.response.Response;
-
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RequestApiService extends RequestMethods {
+public class RequestApiService extends ApiRequestHandler {
 
-    LanguageStore postStore = new LanguageStore();
+    LanguageStore languageStore = new LanguageStore();
 
     public RequestApiService() {
         super(APIConstants.SwaggerAPI.BASE_URL);
     }
 
-    public void postlanguage() throws UnsupportedEncodingException {
+    public void postLanguage() throws UnsupportedEncodingException {
         Map<String, Object> header = new HashMap<String, Object>() {{
             put("Content-Type", "application/json");
         }};
-        Response response = postRequest(APIConstants.SwaggerAPI.API_POST_SUFFIX_LANGUAGE,header,postStore.languageStore());
+        Response response = postRequest(APIConstants.SwaggerAPI.API_POST_SUFFIX_LANGUAGE,header,languageStore.languageStore());
     }
 
-    public void getFile() {
-        Object codeForFile=  dataStoreMap.getContext("codeForFile");
+    public void getLanguageFileDownload() {
+        Object fileCode=  dataStoreMap.getContext("fileCode");
         Map<String, Object> header = new HashMap<String, Object>() {{
             put("Accept", "application/octet-stream");
         }};
-        Response response = getRequest(APIConstants.SwaggerAPI.API_GET_SUFFIX_LANGUAGE + codeForFile,header);
+        Response response = getRequest(APIConstants.SwaggerAPI.API_GET_SUFFIX_LANGUAGE + fileCode,header);
     }
 }
