@@ -4,8 +4,7 @@ import model.AuthorizationValue;
 import model.LanguageRequest;
 
 public class LanguageStore {
-    
-    public LanguageRequest languageStore() {
+    public static LanguageRequest languageStore() {
         LanguageRequest languageRequest = new LanguageRequest();
         languageRequest.setSwaggerUrl("http://petstore.swagger.io/v2/swagger.json");
         AuthorizationValue authorizationValue = new AuthorizationValue();

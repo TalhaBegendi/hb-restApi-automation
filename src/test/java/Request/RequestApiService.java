@@ -1,32 +1,32 @@
 package Request;
 
-import Store.LanguageStore;
 import constant.APIConstants;
-import io.restassured.response.Response;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import static Store.LanguageStore.languageStore;
+import static utils.helper.Helpers.convertToUTF8;
 
 public class RequestApiService extends ApiRequestHandler {
-
-    LanguageStore languageStore = new LanguageStore();
 
     public RequestApiService() {
         super(APIConstants.BASE_URL);
     }
 
-    public void postLanguage() throws UnsupportedEncodingException {
+    public void postLanguage(String getResponse,String setResponse) throws UnsupportedEncodingException {
         Map<String, Object> header = new HashMap<String, Object>() {{
             put("Content-Type", "application/json");
         }};
-        Response response = postRequest(APIConstants.API_POST_SUFFIX_LANGUAGE,header,languageStore.languageStore());
+        response = postRequest(APIConstants.API_POST_SUFFIX_LANGUAGE,header,languageStore());
+        convertToUTF8(getResponse,setResponse);
     }
 
-    public void getLanguageFileDownload() {
-        Object fileCode=  dataStoreMap.getContext("fileCode");
+
+    public void getLanguageFileDownload(String usingSetResponse) {
+        Object fileValue=  dataStoreMap.getContext(""+usingSetResponse+"");
         Map<String, Object> header = new HashMap<String, Object>() {{
             put("Accept", "application/octet-stream");
         }};
-        Response response = getRequest(APIConstants.API_GET_SUFFIX_LANGUAGE + fileCode,header);
+        response = getRequest(APIConstants.API_GET_SUFFIX_LANGUAGE + fileValue,header);
     }
 }
